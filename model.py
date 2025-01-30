@@ -3,7 +3,7 @@ from groq import Groq
 class CloudPilot:
     def predict(self,prompt,context):
         print(context)
-        client = Groq(api_key="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")
+        client = Groq(api_key="")
         completion = client.chat.completions.create(
             model="llama-3.3-70b-versatile",
             messages=[
