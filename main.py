@@ -135,7 +135,8 @@ class PredictionPayload(BaseModel):
 
 @app.post("/predict")
 def predict(predictionPayload:PredictionPayload):
-    context_str = str(predictionPayload.context)
+    strippedContext = predictionPayload.context
+    context_str = str(strippedContext)
     cloudPilot = CloudPilot()
     prediction_result = cloudPilot.predict(predictionPayload.prompt, context_str)
     
