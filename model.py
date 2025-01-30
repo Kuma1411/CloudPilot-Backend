@@ -7,7 +7,12 @@ load_dotenv()
 class CloudPilot:
     def predict(self,prompt,context):
         print(context)
+
         client = Groq(api_key=os.getenv('MODEL_API'))
+   
+
+        client = Groq(api_key="")
+
         completion = client.chat.completions.create(
             model="llama-3.3-70b-versatile",
             messages=[
