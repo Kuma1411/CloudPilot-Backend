@@ -128,13 +128,14 @@ class PredictionPayload(BaseModel):
 
 
 
-@app.post("/predict")
-def predict(predictionPayload:PredictionPayload):
+@app.post("/instruct")
+def instruct(predictionPayload:PredictionPayload):
     strippedContext = predictionPayload.context
     context_str = str(strippedContext)
     cloudPilot = CloudPilot()
-    prediction_result = cloudPilot.predict(predictionPayload.prompt, context_str)
+    prediction_result = cloudPilot.instruct(predictionPayload.prompt, context_str)
     
+    print(prediction_result)
     # Structure the response in JSON format with status 200
     return JSONResponse(
         status_code=200,
@@ -142,4 +143,20 @@ def predict(predictionPayload:PredictionPayload):
             "prediction": prediction_result
         }
     )
+
+@app.post("/navigate")
+def navigate(predictionPayload:PredictionPayload):
+    strippedContext = predictionPayload.context
+    context_str = str(strippedContext)
+    cloudPilot = CloudPilot()
+    prediction_result = cloudPilot.navigate(predictionPayload.prompt, context_str)
+
+    # Structure the response in JSON format with status 200
+    return JSONResponse(
+        status_code=200,
+        content={
+            "prediction": prediction_result
+        }
+    )
+
 
