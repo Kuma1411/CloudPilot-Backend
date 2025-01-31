@@ -6,8 +6,6 @@ load_dotenv()
 
 class CloudPilot:
     def predict(self,prompt,context):
-        print(context)
-
         client = Groq(api_key=os.getenv('MODEL_API'))
 
         completion = client.chat.completions.create(
@@ -15,22 +13,20 @@ class CloudPilot:
             messages=[
                     {
                         "role": "system",
-                        "content": "You are a AWS website helper."+
-                        """Give me the 1 most relevent object only that can help to progress in the given task and
-                        extract the object from the list give me ONLY the className
-
-                        DONT give in this format:
-                        UI(className='awsui_trigger_lpshu_v9srd_145 awsui_trigger-button-styles_lpshu_v9srd_145 awsui_drawers-trigger_1kzri_g64w2_250 awsui_drawers-trigger_1fj9k_z5zo8_18 awsui_drawers-trigger-global_1fj9k_z5zo8_19', textContent='') 
-                        className: awsui_drawers-trigger-global_1fj9k_z5zo8_19
-
-                        GIVE like this format:
-                        awsui_trigger_lpshu_v9srd_145 czxcvzx   xzcvzxc v xczzvs
+                        "content": """
+                        You are a AWS website navigator and helper. You will be provided with an array of words each word represent a ui element which can be:
+                        1. button 
+                        2. a
+                        3. input
+                        4. select
+                        5. textarea
                         
-                        (Never give anything else other than className)
-                        (dont use \ in the format above)
-                        (dont give additional description or opinion just the answer format)
-                        (dont answer any question that is outside the AWS website)""" +
-                        "This is the list of objects which are the ui elements"+ context 
+                        For a given task give me the only 1 name and the most relevent name that will help to increase the progress in the given task.
+                        Give me only the name from the array.
+
+                        The array:
+                        """+ context
+                        
                     },
                     {
                         "role": "user",

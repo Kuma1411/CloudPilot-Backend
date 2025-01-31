@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from model import CloudPilot
 from pydantic import BaseModel
 from fastapi.responses import JSONResponse
-from typing import List, Dict
+from typing import List, Dict, Optional, Union
 from fastapi.middleware.cors import CORSMiddleware
 
 html = """[
@@ -122,14 +122,9 @@ app.add_middleware(
 )
 
 
-class UI(BaseModel):
-    className: str
-    textContent: str
-
-
 class PredictionPayload(BaseModel):
     prompt: str
-    context: List[UI]
+    context: List[str]
 
 
 
