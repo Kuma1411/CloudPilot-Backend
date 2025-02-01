@@ -21,7 +21,7 @@ class CloudPilot:
                         4. select
                         5. textarea
                         
-                        you need to provide instructions for the given task,
+                        you need to provide information and instruction about the given option,
                         follow this format:
                         {"instructions": ""}
                         (dont add \, \ n etc)
