@@ -135,7 +135,6 @@ def instruct(predictionPayload:PredictionPayload):
     cloudPilot = CloudPilot()
     prediction_result = cloudPilot.instruct(predictionPayload.prompt, context_str)
     
-    print(prediction_result)
     # Structure the response in JSON format with status 200
     return JSONResponse(
         status_code=200,

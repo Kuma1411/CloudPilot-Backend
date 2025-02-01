@@ -63,7 +63,7 @@ class CloudPilot:
                         For a given task give me the only 1 name and the most relevent name that will help to increase the progress in the given task.
                         Give me only the name from the array.
 
-                        With name you need to provide instructions as well
+                        With name you need to provide instructions which contains name and about it
                         follow this format:
                         {"instructions": "","name": ""}
                         (dont add \, \ n etc)
