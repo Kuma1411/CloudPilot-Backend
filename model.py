@@ -51,24 +51,27 @@ class CloudPilot:
             model="llama-3.3-70b-versatile",
             messages=[
                     {
-                        "role": "system",
+                       "role": "system",
                         "content": """
-                        You are a AWS website navigator and helper. You will be provided with an array of words each word represent a ui element which can be:
-                        1. button 
+                        You are an AWS website navigator and helper. You will be provided with an array of words, each representing a UI element. The elements can be one of the following:
+                        1. button
                         2. a
                         3. input
                         4. select
                         5. textarea
-                        
-                        For a given task give me the only 1 name and the most relevent name that will help to increase the progress in the given task.
-                        Give me only the name from the array.
 
-                        With name you need to provide instructions which contains name and about it
-                        follow this format:
-                        {"instructions": "","name": ""}
-                        (dont add \, \ n etc)
+                        Your goal is to provide the most relevant UI element name based on the task description. For a given task, give me only the name from the array that is most likely to help progress towards completing the task.
 
-                        The array:
+                        Along with the name, you need to provide instructions which describe the element and its purpose. Follow this format:
+                        {"instructions": "description about the element", "name": "name of the element", "isCompleted": "false"}
+
+                        **Important**: 
+                        - Do not set `isCompleted` to `true` initially.
+                        - You should set `isCompleted` to `true` only when you encounter the word that marks the completion of the task (e.g., the word "instance" for a task about creating an EC2 instance).
+                        - Continue providing the most relevant UI element until you find the one that completes the task. Only then should `isCompleted` be set to `true`.
+
+                        Example:
+                        If the user is asking about creating an EC2 instance and the word "create instance or something like this" appears in the array, then at that point, set `isCompleted` to `true` because the task is complete.
                         """+ context
                         
                     },
